@@ -23,8 +23,70 @@ execute:
 ---
 
 
-## System Information {.unnumbered}
 
-> [!IMPORTANT]
-> **Action Required:** Please rename the `.env.example` file to `.env` in this folder and add your Employability key to it.
+# Submission Validation and Setup
 
+This assignment uses a private API key to create one Excel workbook for your responses. The first run creates a dated workbook in `research_submissions/`. Later runs reuse that same workbook, so you can safely rerun this document without overwriting your work.
+
+- Update the `.env.example` file in this folder with your Employability API key and rename it to `.env`.
+- Update the `EMPLOYABILITY_API_KEY` value with your Employability API key from the previous step. 
+- Run the following code chunk to verify that your API key is working.
+- Do not run the code chunk below this one until you have updated your API key.
+
+```text
+EMPLOYABILITY_API_KEY=replace_with_your_student_api_key
+EMPLOYABILITY_API_BASE_URL=https://met-employability-services.azurewebsites.net
+EMPLOYABILITY_API_PATH_PREFIX=/met-career-match
+RESEARCH_ASSIGNMENT_CODE=M06_L01_emplo
+```
+
+Do not commit `.env`, API keys, screenshots of keys, or generated response files unless your instructor explicitly asks for them.
+
+```{python}
+#| label: load-system-code
+#| include: false
+#| eval: true
+
+from pathlib import Path
+import sys
+
+if not Path("_system_code").exists() and Path("analytics/_system_code").exists():
+    sys.path.insert(0, str(Path("_system_code").resolve()))
+
+from _system_code.research_survey import prepare_workbook, print_runtime_summary, validate_workbook
+```
+
+## System Check
+
+```{python}
+#| label: system-check
+#| eval: true
+#| echo: false
+print_runtime_summary()
+```
+
+## Create or Reuse Your Excel Workbook
+
+```{python}
+#| eval: true
+#| echo: false
+#| label: create-workbook
+workbook_path = prepare_workbook();
+```
+
+Open the generated workbook inside `research_submissions/` folder, complete the `Survey`, `Assignment`, and `AI Chat` sheets, then save the file.
+
+## Validate Your Filled Workbook
+
+**Turn** `eval: true`after you are done with the assignment. 
+
+```{python}
+#| eval: false
+#| echo: false
+#| label: validate-workbook
+validate_workbook()
+```
+
+This validation step checks the Excel workbook locally and creates a local validation report. 
+
+# Assignment Responses
