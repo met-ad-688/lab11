@@ -21,3 +21,10 @@ execute:
   eval: false
   freeze: auto
 ---
+
+
+## System Information {.unnumbered}
+
+> [!IMPORTANT]
+> **Action Required:** Please rename the `.env.example` file to `.env` in this folder and add your Employability key to it.
+
